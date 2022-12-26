@@ -63,13 +63,14 @@ namespace WEBFPTBOOK.Controllers
         }
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult AddBook(Book bookpic,Book book,HttpPostedFileBase fileupload)
+
+        public ActionResult AddBook(Book bookpic, Book book, HttpPostedFileBase fileupload)
         {
             data.Books.InsertOnSubmit(book);
             data.SubmitChanges();
             ViewBag.TopicID = new SelectList(data.Topics.ToList().OrderBy(n => n.TopicName), "TopicID", "TopicName");
             ViewBag.PubID = new SelectList(data.Publishers.ToList().OrderBy(n => n.PubName), "PubID", "PubName");
-            
+
             if (fileupload == null)
             {
                 ViewBag.Notify = "Select Image input";
@@ -93,7 +94,7 @@ namespace WEBFPTBOOK.Controllers
                     bookpic.BookPic = fileName;
                     // Save File
                     data.Books.InsertOnSubmit(bookpic);
-                    data.SubmitChanges();
+
                 }
                 return RedirectToAction("BookManage");
             }
@@ -101,7 +102,7 @@ namespace WEBFPTBOOK.Controllers
         }
         // Create delete all
         [HttpGet]
-        public ActionResult DeleteAll(int id )
+        public ActionResult DeleteAll(int id)
         {
             // Get object to delete
             Book book = data.Books.SingleOrDefault(n => n.BookID == id);
@@ -144,7 +145,7 @@ namespace WEBFPTBOOK.Controllers
             using (var context = new DatabaseDataContext())
             {
                 var data = context.Books.FirstOrDefault(x => x.BookID == id);
-              
+
                 if (data == null)
                 {
                     Response.StatusCode = 404;
@@ -152,7 +153,7 @@ namespace WEBFPTBOOK.Controllers
                 }
                 else
                 {
-                    
+
                     data.BookName = model.BookName;
                     data.Price = model.Price;
                     data.BookDesc = model.BookDesc;
@@ -187,7 +188,7 @@ namespace WEBFPTBOOK.Controllers
             return RedirectToAction("Publisher");
         }
 
-        public ActionResult DeletePubliser( int id )
+        public ActionResult DeletePubliser(int id)
         {
             var dtl = data.Publishers.SingleOrDefault(n => n.PubID == id);
             data.Publishers.DeleteOnSubmit(dtl);
