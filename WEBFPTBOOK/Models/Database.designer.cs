@@ -57,7 +57,7 @@ namespace WEBFPTBOOK.Models
     #endregion
 		
 		public DatabaseDataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["FPTBookConnectionString2"].ConnectionString, mappingSource)
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["FPTBookConnectionString3"].ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
