@@ -68,11 +68,11 @@ namespace WEBFPTBOOK.Controllers
         }
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult AddBook(Book bookpic,Book book,HttpPostedFileBase fileupload)
+        public ActionResult AddBook(Book bookpic, Book book, HttpPostedFileBase fileupload)
         {
             ViewBag.TopicID = new SelectList(data.Topics.ToList().OrderBy(n => n.TopicName), "TopicID", "TopicName");
             ViewBag.PubID = new SelectList(data.Publishers.ToList().OrderBy(n => n.PubName), "PubID", "PubName");
-            
+
             if (fileupload == null)
             {
                 ViewBag.Notify = "Select Image input";
@@ -104,7 +104,7 @@ namespace WEBFPTBOOK.Controllers
         }
         // Create delete all
         [HttpGet]
-        public ActionResult DeleteAll(int id )
+        public ActionResult DeleteAll(int id)
         {
             // Get object to delete
             Book book = data.Books.SingleOrDefault(n => n.BookID == id);
@@ -143,9 +143,9 @@ namespace WEBFPTBOOK.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult EditBook(int id, Book model ,HttpPostedFileBase fileupload)
+        public ActionResult EditBook(int id, Book model, HttpPostedFileBase fileupload)
         {
-                using (var context = new DatabaseDataContext())
+            using (var context = new DatabaseDataContext())
             {
                 var data = context.Books.FirstOrDefault(x => x.BookID == id);
                 if (data == null)
@@ -159,19 +159,34 @@ namespace WEBFPTBOOK.Controllers
                     data.Price = model.Price;
                     data.BookDesc = model.BookDesc;
                     data.BookDesc = model.BookDesc;
+                    if (fileupload != null)
+                    {
+
+                        //save file image
+                        var fileName = Path.GetFileName(fileupload.FileName);
+                        // save link file
+                        var path = Path.Combine(Server.MapPath("~/product_imgs"), Path.GetFileName(fileName));
+                        if (System.IO.File.Exists(path))
+                            ViewBag.Notify = "image already exists";
+                        else
+                        {
+                            fileupload.SaveAs(path);
+                        }
+                        model.BookPic = fileName;
+                    }
                     data.BookPic = model.BookPic;
                     data.DayUpdate = model.DayUpdate;
                     data.Quality = model.Quality;
                     data.TopicID = model.TopicID;
                     data.PubID = model.PubID;
-                  
+
                     context.SubmitChanges();
 
                 }
-                return View();
+                return RedirectToAction("BookManage");
 
             }
-          
+
         }
 
         //Create Publisher manage
@@ -192,7 +207,7 @@ namespace WEBFPTBOOK.Controllers
             return RedirectToAction("Publisher");
         }
 
-        public ActionResult DeletePubliser( int id )
+        public ActionResult DeletePubliser(int id)
         {
             var dtl = data.Publishers.SingleOrDefault(n => n.PubID == id);
             data.Publishers.DeleteOnSubmit(dtl);
@@ -205,7 +220,7 @@ namespace WEBFPTBOOK.Controllers
             return View(data.Publishers.SingleOrDefault(n => n.PubID == id));
         }
         [HttpPost]
-        public ActionResult EditPublisher(Publisher pub,int id)
+        public ActionResult EditPublisher(Publisher pub, int id)
         {
             using (var context = new DatabaseDataContext())
             {
@@ -222,11 +237,11 @@ namespace WEBFPTBOOK.Controllers
                     data.Phone = pub.Phone;
                     context.SubmitChanges();
                 }
-               
+
 
             }
-          
-           
+
+
             return RedirectToAction("Publisher");
         }
 
