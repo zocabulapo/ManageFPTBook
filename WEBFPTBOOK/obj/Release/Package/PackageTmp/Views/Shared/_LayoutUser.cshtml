@@ -26,7 +26,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand">FPTBOOK STORE</a>
+                <a class="navbar-brand">FPTBook Shop</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -40,23 +40,15 @@
                         }
                         else
                         {
-                            <li class="navbar-brand">Hi, @Session["Username"]</li>
-                            <li>@Html.ActionLink("Profile", "EditCus","User",new { id = Session["id"] })</li>
+                            <li class="navbar-brand">Hello, @Session["Username"]</li>
+
                             <li>@Html.ActionLink("Order", "Order", "Cart")</li>
                             <li>@Html.Action("CartPartial", "Cart")</li>
                             <li>@Html.ActionLink("Logout", "Logout", "User")</li>
 
                         }
                     </ul>
-                    <div class="form-inline">
-                        @using (Html.BeginForm("SearchResult", "FPTBook"))
-                        {
-                            <p>
-                                <input class="form-control mr-sm-2" name="searchKey" type="search" placeholder="Search" aria-label="Search">
-                                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                            </p>
-                        }
-                    </div>
+                  
                 </div>
 
                 
@@ -69,7 +61,17 @@
     </nav>
 
     <!-- Page Content -->
+      <div style="text-align:center;" class="form-inline">
+                        @using (Html.BeginForm("SearchResult", "FPTBook"))
+                        {
+                            <a>
+                                <input class="form-control mr-sm-2" name="searchKey" type="search" placeholder="Search" aria-label="Search">
+                                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                            </a>
+                        }
+                    </div>
     <div class="container">
+
 
         <div class="row">
 
@@ -77,47 +79,13 @@
                 @Html.Action("Topic", "FPTBook")
                 @Html.Action("Publisher", "FPTBook")
             </div>
-
                 <div class="col-md-9">
-
-                    <div class="row carousel-holder">
-
-                        <div class="col-md-12">
-                            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                                <ol class="carousel-indicators">
-                                    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                                    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                                    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-                                </ol>
-                                <div class="carousel-inner">
-                                    <div class="item active">
-                                        <img class="slide-image" src="~/images/bg1.jpg" alt="">
-                                    </div>
-                                    <div class="item">
-                                        <img class="slide-image" src="~/images/header33.jpg" alt="">
-                                    </div>
-                                </div>
-                                <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-                                    <span class="glyphicon glyphicon-chevron-left"></span>
-                                </a>
-                                <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-                                    <span class="glyphicon glyphicon-chevron-right"></span>
-                                </a>
-                            </div>
-                        </div>
-
                     </div>
-                    </div>
-                    
                     <div>
                         @RenderBody()
                     </div>
 
-
-
-                    <!-- /.container -->
-
-                    <div class="container">
+                   <div class="container">
 
                         <hr>
 
@@ -125,7 +93,7 @@
                         <footer>
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <p>Copyright &copy; FPTBOOK STORE</p>
+                                    <p>Copyright &copy; FPTBook shop</p>
                                 </div>
                             </div>
                         </footer>

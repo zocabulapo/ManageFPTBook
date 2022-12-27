@@ -57,7 +57,7 @@ namespace WEBFPTBOOK.Models
     #endregion
 		
 		public DatabaseDataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["FPTBookConnectionString1"].ConnectionString, mappingSource)
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["FPTBookConnectionString2"].ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -157,9 +157,7 @@ namespace WEBFPTBOOK.Models
 				return this.GetTable<Publisher>();
 			}
 		}
-
-    
-    }
+	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Admin")]
 	public partial class Admin : INotifyPropertyChanging, INotifyPropertyChanged
@@ -905,17 +903,7 @@ namespace WEBFPTBOOK.Models
 			this.SendPropertyChanging();
 			entity.Book = null;
 		}
-
-        internal void SubmitChanges()
-        {
-            throw new NotImplementedException();
-        }
-
-        internal void SaveChanges()
-        {
-            throw new NotImplementedException();
-        }
-    }
+	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.BookWriter")]
 	public partial class BookWriter

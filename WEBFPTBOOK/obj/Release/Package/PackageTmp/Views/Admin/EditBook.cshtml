@@ -7,7 +7,7 @@
 
 <h2>EditBook</h2>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("EditBook", "Admin",FormMethod.Post, new { enctype="multipart/form-data"}))
 {
     @Html.AntiForgeryToken()
     
@@ -46,7 +46,7 @@
             <div class="col-md-10">
                 Select Image new
                 <input type="file" name="fileupload" />
-                <img width="70px" src="@Url.Content("~/images/"+ Model.BookPic)" />
+                <img width="70px" src="@Url.Content("~/product_imgs/"+ Model.BookPic)" />
                 @ViewBag.Notify
             </div>
         </div>

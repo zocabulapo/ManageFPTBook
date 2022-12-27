@@ -3,13 +3,13 @@
 
 @helper Truncate(string input, int lengt)
 {
-    if(input.Length < lengt)
+    if (input.Length < lengt)
     {
         @input
     }
     else
     {
-        @input.Substring(0,lengt)<text>....</text>
+        @input.Substring(0, lengt)<text>....</text>
     }
 }
 @{
@@ -49,7 +49,7 @@
                 @Truncate(item.BookDesc, 100)
             </td>
             <td>
-                <img width="70px" src="@Url.Content("~/images/"+ item.BookPic)" />
+                <img width="70" src="@Url.Content("~/product_imgs/"+ item.BookPic)" />
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.DayUpdate)
